@@ -10,6 +10,11 @@
   
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 button {
   width: 7rem;
   height: 1.8rem;

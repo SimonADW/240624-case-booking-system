@@ -125,8 +125,3 @@ export const rooms = [
 		bookings: []
 	}
 ];
-
-// Example: Adding a booking to room 3
-// rooms[2].bookings.push({ firstname: "Jane", lastname: "Smith", pax: 1, dates: [20240628, 20240629] });
-
-
