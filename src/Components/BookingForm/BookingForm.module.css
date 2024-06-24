@@ -1,0 +1,15 @@
+.bookingForm {
+	border: 1px solid black;
+	display: flex;
+	flex-flow: wrap;
+	justify-content: space-around;
+	padding: 2rem;
+	row-gap: 1rem;
+}
+
+.bookingForm div {
+	width: 10rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}

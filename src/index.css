@@ -10,3 +10,10 @@
   
 }
 
+button {
+  width: 7rem;
+  height: 1.8rem;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 3px;
+}

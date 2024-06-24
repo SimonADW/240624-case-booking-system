@@ -1,0 +1,14 @@
+.listElement {
+	margin-bottom: 1rem;
+	width: 15rem;
+}
+
+.listElement span {
+	font-weight: bold;
+}
+
+.listElement div {
+	display: flex;
+	justify-content: space-between;
+}
+
