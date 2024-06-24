@@ -1,0 +1,20 @@
+main {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: rgb(23, 29, 40);
+}
+
+section {
+	max-width: 1080px;
+	margin: 0 auto;
+	flex: 1 0 auto;
+}
+
+footer {
+	max-width: 1080px;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+}
