@@ -1,4 +1,8 @@
 main {
+	font-family: "Barlow", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;

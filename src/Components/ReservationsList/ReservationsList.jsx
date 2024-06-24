@@ -31,15 +31,24 @@ const ReservationsList = ({roomsArray}) => {
   return (
 	// Render all bookings (if any)
 	<ul>			
+		<li className={`${style.listElement} ${style.listHeader}`}>
+					<div>First name</div>
+					<div>Last name</div>
+					<div>Pax</div>
+					<div>Nights</div>
+					<div>Dates</div>
+					<div>Room number</div>
+					<div>Category</div>
+				</li>
 		{currentBookings.length > 0 ? currentBookings.map((booking)=> {
 			return <li className={style.listElement} key={booking.roomnum}>
-					<div><span>First name:</span> {booking.firstname}</div>
-					<div><span>Last name:</span> {booking.lastname}</div>
-					<div><span>Pax:</span> {booking.pax}</div>
-					<div><span>Nights:</span> {booking.nights}</div>
-					<div><span>Dates:</span>{booking.dates}</div>
-					<div><span>Room number:</span> {booking.roomnum}</div>
-					<div><span>Category:</span> {booking.category}</div>
+					<div>{booking.firstname}</div>
+					<div>{booking.lastname}</div>
+					<div>{booking.pax}</div>
+					<div>{booking.nights}</div>
+					<div className={style.datesDiv}>{booking.dates}</div>
+					<div>{booking.roomnum}</div>
+					<div>{booking.category}</div>
 				</li>
 		}) : <h3>No bookings</h3> }
 	</ul>

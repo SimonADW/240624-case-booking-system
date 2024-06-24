@@ -1,14 +1,25 @@
 .listElement {
 	margin-bottom: 1rem;
-	width: 15rem;
-}
-
-.listElement span {
-	font-weight: 500;
-}
-
-.listElement div {
+	width: 100%;
 	display: flex;
-	justify-content: space-between;
 }
+
+/* @TODO: FIX DATE WRAPPING  */
+.listElement div {
+	width: 10vw;
+	display: flex;
+	justify-content: center;
+	border-right: 1px solid var(--color-foreground);	
+}
+
+.datesDiv {
+	flex-wrap: wrap;
+	color: red;
+}
+
+.listHeader {
+	font-weight: 500;
+	font-style: normal;
+}
+
 

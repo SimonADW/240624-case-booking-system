@@ -17,4 +17,5 @@
 .bookingForm input,
 .bookingForm select {
 	height: 2rem;
+	padding: 0.3rem;
 }
