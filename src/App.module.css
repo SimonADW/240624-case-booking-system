@@ -13,6 +13,7 @@ section {
 
 footer {
 	max-width: 1080px;
+	margin: 0 auto;
 	height: 2rem;
 	display: flex;
 	align-items: center;

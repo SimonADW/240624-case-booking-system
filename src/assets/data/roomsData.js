@@ -1,4 +1,4 @@
-export const rooms = [
+export const roomsData = [
 	{
 		roomnum: 1,
 		category: 'singleroom',

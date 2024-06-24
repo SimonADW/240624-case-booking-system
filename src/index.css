@@ -16,6 +16,8 @@
 	--color-background: rgb(23, 29, 40);
 	--color-foreground: rgb(255, 255, 255);
 	--color-button: rgb(241, 129, 213);
+	--color-button-hover: rgb(186, 107, 166);
+	--color-button-active: rgb(97, 49, 85);
 
   	color: var(--color-foreground);
 	background: var(--color-foreground);
@@ -23,13 +25,17 @@
 
 button {
 	width: 7rem;
-	height: 1.8rem;
+	height: 2rem;
 	background: var(--color-button);
-  	border: none;	
+	border: none;	
 	border-radius: 3px;
 	cursor: pointer;
 }
 
-body {
-	background: var(--color-foreground);
+button:hover {		
+	background: var(--color-button-hover);		
+}
+
+button:active {
+	background: var(--color-button-active);		
 }

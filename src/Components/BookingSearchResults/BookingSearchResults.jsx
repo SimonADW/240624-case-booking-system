@@ -1,13 +1,16 @@
-const BookingSearchResults = (searchResult) => {
+import style from "./BookingSearchResults.module.css"
+
+
+const BookingSearchResults = ({searchResult}) => {
 	return (
 		<ul>
 			{searchResult ? (
 				searchResult.map((result, index) => {
-					return <li key={index}>
-						<span>{result.roomnumber}</span>
-						<span>{result.date}</span>
-						<span>{result.nights}</span>
-						<span>{result.category}</span>
+					return <li className={style.searchListItem} key={index}>
+						<span><img src="" alt="HotelRoomImage" /></span>
+						<span>Roomnumber: {result.roomnum}</span>												
+						<span>Room type: {result.category}</span>
+						<button>Book Room</button>
 					</li>
 				})
 			) : (

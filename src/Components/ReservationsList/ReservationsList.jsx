@@ -1,14 +1,13 @@
-import { rooms } from "../../assets/data/roomsData"
 import style from "./ReservationList.module.css"
 
-const ReservationsList = () => {
+const ReservationsList = ({roomsArray}) => {
 	const currentBookings = [];
 	
 	// Extract upcoming bookings from roomlist
 	const todaysDate = new Date();
 	const todayIsoDateWithoutDash = todaysDate.toISOString().split("T")[0].replace(/-/g, "");
 	
-	for(let room of rooms) {
+	for(let room of roomsArray) {
 		if(room.bookings.length > 0) {
 			for (let booking of room.bookings) {
 				// Only extract dates not passed
@@ -28,8 +27,6 @@ const ReservationsList = () => {
 			}
 		}
 	}
-
-	console.log(currentBookings);
 
   return (
 	// Render all bookings (if any)

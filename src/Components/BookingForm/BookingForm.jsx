@@ -2,8 +2,8 @@ import { useState } from "react";
 import BookingSearchResults from "../BookingSearchResults/BookingSearchResults";
 import style from "./BookingForm.module.css";
 
-const BookingForm = () => {
-	const [searchResult, setSearchResult] = useState([]);
+const BookingForm = ({roomsArray}) => {
+	const [searchResult, setSearchResult] = useState([]);	
 	const [formValues, setFormValues] = useState({
 		arrivalDate: "",
 		nights: 1,
@@ -18,23 +18,48 @@ const BookingForm = () => {
 		setFormValues({
 			...formValues,
 			[name]:value
-		})
+		})		
 	}
+
+	// TODO: Fix filter-function: filtering out all room with a booking	 
+	const getSearchResult = ()=> {
+		const { arrivalDate, roomnum } = formValues;		
+		let availableRooms = [];
+		// Get available rooms, if room is selected		
+		if (formValues.roomnum) {
+			availableRooms = roomsArray.filter((room)=> {				
+				return room.roomnum !== parseInt(roomnum) && 
+				!room.bookings.some(booking => booking.dates.includes(arrivalDate))			
+			})			
+		} else {
+			availableRooms = roomsArray.filter((room)=> {
+				return !room.bookings.some(booking => booking.dates.includes(arrivalDate))
+			}) 			
+		}
+		return availableRooms
+	}
+
+	const handleSubmit = (event)=> {
+		event.preventDefault()		
+		setSearchResult(getSearchResult())	
+	}
+
+	
 
 	return (
 		<>
-			<form className={style.bookingForm} action="">
+			<form className={style.bookingForm} onSubmit={handleSubmit} action="">
 				<div>
-					<label htmlFor="arrivaldate">Arrival Date</label>
-					<input type="date" id="arrivaldate" value={formValues.arrivalDate} onChange={handleInputChange} />
+					<label htmlFor="arrivaldate">Arrival Date<sup>*</sup></label>
+					<input name="arrivalDate" type="date" id="arrivaldate" value={formValues.arrivalDate} onChange={handleInputChange} />
 				</div>
 				<div>
-					<label htmlFor="nights">Nights</label>
-					<input type="number" id="nights" value={formValues.nights} onChange={handleInputChange} />
+					<label htmlFor="nights">Nights<sup>*</sup></label>
+					<input name="nights" type="number" id="nights" value={formValues.nights} onChange={handleInputChange} />
 				</div>
 				<div>
-					<label htmlFor="category">Room Category</label>
-					<select name="category" id="category" defaultValue={"singleroom1pax"}>
+					<label htmlFor="category">Room Category<sup>*</sup></label>
+					<select name="category" id="category" defaultValue={"singleroom1pax"} onChange={handleInputChange}>
 						<option value="singleroom1pax">
 							Single Room, 1 person
 						</option>
@@ -48,20 +73,20 @@ const BookingForm = () => {
 				</div>
 				<div>
 					<label htmlFor="roomnumber">Room</label>
-					<input type="num" id="roomnumber" value={formValues.roomnum} onChange={handleInputChange}/>
+					<input name="roomnum" type="num" id="roomnumber" value={formValues.roomnum} onChange={handleInputChange}/>
 				</div>
 				<div>
-					<label htmlFor="firstname">First Name</label>
-					<input type="text" id="firstname" value={formValues.firstname} onChange={handleInputChange}/>
+					<label htmlFor="firstname">First Name<sup>*</sup></label>
+					<input name="firstname" type="text" id="firstname" value={formValues.firstname} onChange={handleInputChange}/>
 				</div>
 				<div>
-					<label htmlFor="lastname">Last Name</label>
-					<input type="text" id="lastname" value={formValues.lastname} onChange={handleInputChange}/>
+					<label htmlFor="lastname">Last Name<sup>*</sup></label>
+					<input name="lastname" type="text" id="lastname" value={formValues.lastname} onChange={handleInputChange}/>
 				</div>
-				<button>Search availability</button>
+				<button type="submit">Search availability</button>
 			</form>
 
-			{/* <BookingSearchResults searchResult={searchResult} /> */}
+			<BookingSearchResults searchResult={searchResult} />
 		</>
 	);
 };
