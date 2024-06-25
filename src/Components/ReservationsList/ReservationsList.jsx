@@ -5,7 +5,7 @@ const ReservationsList = ({roomsArray}) => {
 	
 	// Extract upcoming bookings from roomlist
 	const todaysDate = new Date();
-	const todayIsoDateWithoutDash = todaysDate.toISOString().split("T")[0].replace(/-/g, "");
+	const todayIsoDateWithoutDash = todaysDate.toISOString();
 	
 	for(let room of roomsArray) {
 		if(room.bookings.length > 0) {

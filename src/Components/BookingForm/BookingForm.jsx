@@ -21,19 +21,21 @@ const BookingForm = ({roomsArray}) => {
 		})		
 	}
 
-	// TODO: Fix filter-function: filtering out all room with a booking	 
+	
 	const getSearchResult = ()=> {
 		const { arrivalDate, roomnum } = formValues;		
 		let availableRooms = [];
+
 		// Get available rooms, if room is selected		
 		if (formValues.roomnum) {
+			// TODO: Fix filter-function: filtering out all room with a booking	 
 			availableRooms = roomsArray.filter((room)=> {				
 				return room.roomnum !== parseInt(roomnum) && 
-				!room.bookings.some(booking => booking.dates.includes(arrivalDate))			
+				!room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
 			})			
 		} else {
 			availableRooms = roomsArray.filter((room)=> {
-				return !room.bookings.some(booking => booking.dates.includes(arrivalDate))
+				return !room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
 			}) 			
 		}
 		return availableRooms
@@ -83,7 +85,7 @@ const BookingForm = ({roomsArray}) => {
 					<label htmlFor="lastname">Last Name<sup>*</sup></label>
 					<input name="lastname" type="text" id="lastname" value={formValues.lastname} onChange={handleInputChange}/>
 				</div>
-				<button type="submit">Search availability</button>
+				<button type="submit">Check availability</button>
 			</form>
 
 			<BookingSearchResults searchResult={searchResult} />

@@ -2,7 +2,7 @@ export const roomsData = [
 	{
 		roomnum: 1,
 		category: 'singleroom',
-		bookings: [{ firstname: "Jane", lastname: "Smith", pax: 1, dates: [20240628, 20240629] }]
+		bookings: [{ firstname: "Jane", lastname: "Smith", pax: 1, dates: ["2024-06-28", "2024-06-29"] }]
 	},
 	{
 		roomnum: 2,
