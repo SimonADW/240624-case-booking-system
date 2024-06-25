@@ -26,11 +26,13 @@ const BookingForm = ({roomsArray}) => {
 		const { arrivalDate, roomnum } = formValues;		
 		let availableRooms = [];
 
+
+
 		// Get available rooms, if room is selected		
-		if (formValues.roomnum) {
-			// TODO: Fix filter-function: filtering out all room with a booking	 
-			availableRooms = roomsArray.filter((room)=> {				
-				return room.roomnum !== parseInt(roomnum) && 
+		if (formValues.roomnum) {	 
+			availableRooms = roomsArray.filter((room)=> {
+
+				return room.roomnum === parseInt(roomnum) &&
 				!room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
 			})			
 		} else {
@@ -38,6 +40,7 @@ const BookingForm = ({roomsArray}) => {
 				return !room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
 			}) 			
 		}
+		console.log(availableRooms);
 		return availableRooms
 	}
 
