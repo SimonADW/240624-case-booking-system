@@ -19,9 +19,9 @@ function App() {
     //   window.localStorage.setItem("rooms", JSON.stringify(roomsData));
     // }, []);
   
-    useEffect(() => {		
-      window.localStorage.setItem("rooms", JSON.stringify(roomsArray));
-    }, [roomsArray]);
+  useEffect(() => {		
+    window.localStorage.setItem("rooms", JSON.stringify(roomsArray));
+  }, [roomsArray]);
 
 
 	return (
