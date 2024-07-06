@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import BookingSearchResults from "../BookingSearchResults/BookingSearchResults";
 import style from "./BookingForm.module.css";
 
@@ -15,38 +15,39 @@ const BookingForm = ({roomsArray}) => {
 
 	const handleInputChange = (event)=> {
 		const { name, value } = event.target;
-		setFormValues({
-			...formValues,
+		setFormValues(
+			(prev)=> ({
+			...prev,
 			[name]:value
-		})		
+		}))
 	}
 
+	const getAvailableRooms = useCallback(
+		()=> {
+			const { arrivalDate, roomnum } = formValues;
+			let availableRooms = [];
 	
-	const getSearchResult = ()=> {
-		const { arrivalDate, roomnum } = formValues;		
-		let availableRooms = [];
-
-
-
-		// Get available rooms, if room is selected		
-		if (formValues.roomnum) {	 
-			availableRooms = roomsArray.filter((room)=> {
-
-				return room.roomnum === parseInt(roomnum) &&
-				!room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
-			})			
-		} else {
-			availableRooms = roomsArray.filter((room)=> {
-				return !room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
-			}) 			
-		}
-		console.log(availableRooms);
-		return availableRooms
-	}
+			// Get available rooms, if room is selected		
+			if (formValues.roomnum) {	 
+				availableRooms = roomsArray.filter((room)=> {
+	
+					return room.roomnum === parseInt(roomnum) &&
+					!room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
+				})			
+			} else {
+				availableRooms = roomsArray.filter((room)=> {
+					return !room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
+				}) 			
+			}
+			console.log(availableRooms);
+			return availableRooms
+		}, [formValues, roomsArray]
+	)
+	
 
 	const handleSubmit = (event)=> {
 		event.preventDefault()		
-		setSearchResult(getSearchResult())	
+		setSearchResult(getAvailableRooms())	
 	}
 
 	
