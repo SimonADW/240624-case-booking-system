@@ -11,7 +11,7 @@ const BookingForm = ({ roomsArray }) => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			arrivalDate: "",
+			arrivalDate: getTodaysDate(),
 			nights: 1,
 			category: "singleroom1pax",
 			roomnum: "",
@@ -26,43 +26,37 @@ const BookingForm = ({ roomsArray }) => {
 		return toDaysDateIsoString;
 	}
 
-	getTodaysDate();
+	const getAvailableRooms = useCallback(
+		(data) => {
+			const { arrivalDate, roomnum } = data;
+			let availableRooms = [];
 
-	const handleInputChange = (data) => {
-		console.log(data);
-	};
+			// Get available rooms, if room is selected
+			if (data.roomnum) {
+				availableRooms = roomsArray.filter((room) => {
+					return (
+						room.roomnum === parseInt(roomnum) &&
+						!room.bookings.some((booking) =>
+							booking.dates.includes(arrivalDate.trim())
+						)
+					);
+				});
+			} else {
+				availableRooms = roomsArray.filter((room) => {
+					return !room.bookings.some((booking) =>
+						booking.dates.includes(arrivalDate.trim())
+					);
+				});
+			}
+			console.log(availableRooms);
+			return availableRooms;
+		},
+		[roomsArray]
+	);
 
-	// const getAvailableRooms = useCallback(
-	// 	()=> {
-	// 		const { arrivalDate, roomnum } = formValues;
-	// 		let availableRooms = [];
-
-	// 		// Get available rooms, if room is selected
-	// 		if (formValues.roomnum) {
-	// 			availableRooms = roomsArray.filter((room)=> {
-
-	// 				return room.roomnum === parseInt(roomnum) &&
-	// 				!room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
-	// 			})
-	// 		} else {
-	// 			availableRooms = roomsArray.filter((room)=> {
-	// 				return !room.bookings.some(booking => booking.dates.includes(arrivalDate.trim()))
-	// 			})
-	// 		}
-	// 		console.log(availableRooms);
-	// 		return availableRooms
-	// 	}, [formValues, roomsArray]
-	// )
-
-	// const handleSubmission = useCallback((data)=> {
-	// 	event.preventDefault()
-	// 	console.log(data);
-	// 	setSearchResult(getAvailableRooms())
-	// },[])
-
-	const onSubmit = (data) => {
-		console.log(data);
-	};
+	const onSubmit = useCallback((data) => {
+		setSearchResult(getAvailableRooms(data));
+	});
 
 	return (
 		<>
