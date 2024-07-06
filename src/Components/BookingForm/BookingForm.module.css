@@ -26,6 +26,12 @@
 	justify-content: flex-start;
 }
 
+.bookingForm p {
+	color: red;
+	font-size: 14px;
+
+}
+
 .bookingForm input,
 .bookingForm select {
 	height: 2rem;
