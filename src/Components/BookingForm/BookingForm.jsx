@@ -7,16 +7,7 @@ import { useForm } from "react-hook-form";
  * Booking form component
  * 
  * @param {{
- * 	roomsArray: {
- * 		roomnum: number
- * 		category: string
- * 		bookings: {
- * 			firstname: string
- * 			lastname: string
- * 			pax: number
- * 			dates: string[]
- * 		}[]
- * 	}[]
+ * 	roomsArray: RoomItem[]
  * }} props
  */
 const BookingForm = ({ roomsArray }) => {
