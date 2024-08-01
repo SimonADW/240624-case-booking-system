@@ -20,7 +20,8 @@ import { useForm } from "react-hook-form";
  * }} props
  */
 const BookingForm = ({ roomsArray }) => {
-	const [searchResult, setSearchResult] = useState([]);
+	/** @type {useState<{ roomnum: number, category: string }[] | undefined>} */
+	const [searchResult, setSearchResult] = useState();
 	const {
 		register,
 		handleSubmit,
@@ -43,6 +44,9 @@ const BookingForm = ({ roomsArray }) => {
 	}
 
 	const getAvailableRooms = useCallback(
+		/**
+		 * @param {{ arrivalDate: string, roomnum: string }} data 
+		 */
 		(data) => {
 			const { arrivalDate, roomnum } = data;
 			let availableRooms = [];
@@ -70,7 +74,7 @@ const BookingForm = ({ roomsArray }) => {
 		[roomsArray]
 	);
 
-	const onSubmit = useCallback((data) => {
+	const onSubmit = handleSubmit((data) => {
 		setSearchResult(getAvailableRooms(data));
 	});
 
@@ -78,7 +82,7 @@ const BookingForm = ({ roomsArray }) => {
 		<>
 			<form
 				className={style.bookingForm}
-				onSubmit={handleSubmit(onSubmit)}
+				onSubmit={onSubmit}
 				action=""
 			>
 				<div>
@@ -169,7 +173,7 @@ const BookingForm = ({ roomsArray }) => {
 				<button type="submit">Check availability</button>
 			</form>
 
-			<BookingSearchResults searchResult={searchResult} />
+			<BookingSearchResults searchResult={searchResult ?? []} />
 		</>
 	);
 };
