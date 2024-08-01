@@ -4,6 +4,7 @@
         "lib": ["ES2019", "DOM"],
         "moduleResolution": "node",
         "jsx": "react-jsx",
+        "allowSyntheticDefaultImports": true,
         "checkJs": true,
         "strict": true,
         "noImplicitAny": false
