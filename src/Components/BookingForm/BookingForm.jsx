@@ -3,6 +3,22 @@ import BookingSearchResults from "../BookingSearchResults/BookingSearchResults";
 import style from "./BookingForm.module.css";
 import { useForm } from "react-hook-form";
 
+/**
+ * Booking form component
+ * 
+ * @param {{
+ * 	roomsArray: {
+ * 		roomnum: number
+ * 		category: string
+ * 		bookings: {
+ * 			firstname: string
+ * 			lastname: string
+ * 			pax: number
+ * 			dates: string[]
+ * 		}[]
+ * 	}[]
+ * }} props
+ */
 const BookingForm = ({ roomsArray }) => {
 	const [searchResult, setSearchResult] = useState([]);
 	const {
