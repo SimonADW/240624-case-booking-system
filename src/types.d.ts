@@ -1,6 +1,7 @@
 declare module '*.module.css'
 
 type useState<T> = [T, React.Dispatch<T>];
+type createContext<T> = React.Context<T>;
 
 type RoomItem = {
     roomnum: number
