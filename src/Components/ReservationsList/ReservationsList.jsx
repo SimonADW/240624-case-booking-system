@@ -1,5 +1,21 @@
 import style from "./ReservationList.module.css"
 
+/**
+ * Reservations list component
+ * 
+ * @param {{
+ * 	roomsArray: {
+ * 		roomnum: number
+ * 		category: string
+ * 		bookings: {
+ * 			firstname: string
+ * 			lastname: string
+ * 			pax: number
+ * 			dates: string[]
+ * 		}[]
+ * 	}[]
+ * }} props
+ */
 const ReservationsList = ({roomsArray}) => {
 	const currentBookings = [];
 	

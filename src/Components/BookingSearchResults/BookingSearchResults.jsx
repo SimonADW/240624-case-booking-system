@@ -1,6 +1,15 @@
 import style from "./BookingSearchResults.module.css"
 
-
+/**
+ * Booking search results component
+ * 
+ * @param {{
+ * 	searchResult: {
+ * 		roomnum: number
+ * 		category: string
+ * 	}[]
+ * }} props 
+ */
 const BookingSearchResults = ({searchResult}) => {
 	return (
 		<ul>

@@ -1,6 +1,12 @@
 import style from "./Header.module.css";
 
-
+/**
+ * Header component
+ * 
+ * @param {{
+ * 	setIsFormOpen: (open: boolean) => void
+ * }} props
+ */
 const Header = ({setIsFormOpen}) => {
   return (
 	<>
