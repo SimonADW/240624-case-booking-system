@@ -1,5 +1,6 @@
-import { useState, useContext, createContext } from 'react'
-import { roomsData } from "../assets/data/roomsData.js"
+import { useState, useContext, createContext, useEffect } from 'react'
+import { fetchRooms } from '../services/roomsAPI/fetchRooms';
+
 
 /** 
  * @type {createContext<Record<string, never> | { 
@@ -9,12 +10,19 @@ import { roomsData } from "../assets/data/roomsData.js"
 */
 const RoomsContext = createContext({});
 
-export const RoomsProvider = ({ children }) => {
-	const [roomsArray, setRoomsArray] = useState(
-		() => {
-			return roomsData
+
+export const RoomsProvider = ({ children }) => {	
+	const [roomsArray, setRoomsArray] = useState([]);
+	
+	// Fetch roomslist from mock API
+	useEffect(() => {
+		const fetchAndSetRooms = async ()=> {
+			const roomsData = await fetchRooms();				 
+			setRoomsArray(roomsData);
 		}
-	);
+		fetchAndSetRooms();
+	}, [])
+	
 
 	return (
 		<RoomsContext.Provider value={{ roomsArray, setRoomsArray }}>
@@ -31,11 +39,11 @@ export const useRooms = () => {
 
 	const { roomsArray, setRoomsArray } = context
 
-	const bookRoom = (roomnum, arrivalDate, pax, firstname, lastname) => {
+	const bookRoom = (roomnum, arrivalDate, nights, pax, firstname, lastname) => {
 		const newRoomsArray = roomsArray.map(room => {
 			if (room.roomnum === roomnum) {
 				const newBookings = [...room.bookings, { 
-					dates:  new Array(3).fill(1).map((_, i) => new Date(new Date(arrivalDate).getTime() + (86400000 * i)).toISOString().slice(0, 10)),
+					dates:  new Array(nights).fill(1).map((_, i) => new Date(new Date(arrivalDate).getTime() + (86400000 * i)).toISOString().slice(0, 10)),
 					pax, 
 					firstname, 
 					lastname 

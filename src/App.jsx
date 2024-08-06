@@ -18,8 +18,6 @@ function App() {
          {isFormOpen ? <BookingForm roomsArray={roomsArray} /> : <ReservationsList roomsArray={roomsArray}/>}
         </section>
 
-
-
         <footer>2024 © Simon Winter</footer>
       </main>
 		</>
