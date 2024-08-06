@@ -1,35 +1,7 @@
-import { useState, useContext, createContext, useEffect } from 'react'
-import { fetchRooms } from '../services/roomsAPI/fetchRooms';
+import { useContext } from 'react'
+import { RoomsContext } from '../Components/RoomsProvider/RoomsProvider'
 
 
-/** 
- * @type {createContext<Record<string, never> | { 
- *      roomsArray: RoomItem[],
- *      setRoomsArray: React.Dispatch<React.SetStateAction<RoomItem[]>>
- * }>}
-*/
-const RoomsContext = createContext({});
-
-
-export const RoomsProvider = ({ children }) => {	
-	const [roomsArray, setRoomsArray] = useState([]);
-	
-	// Fetch roomslist from mock API
-	useEffect(() => {
-		const fetchAndSetRooms = async ()=> {
-			const roomsData = await fetchRooms();				 
-			setRoomsArray(roomsData);
-		}
-		fetchAndSetRooms();
-	}, [])
-	
-
-	return (
-		<RoomsContext.Provider value={{ roomsArray, setRoomsArray }}>
-			{children}
-		</RoomsContext.Provider>
-	)
-}
 
 export const useRooms = () => {
 	const context = useContext(RoomsContext)

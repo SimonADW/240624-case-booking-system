@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { RoomsProvider } from './hooks/useRooms.jsx'
+import { RoomsProvider } from './Components/RoomsProvider/RoomsProvider.jsx'
 
 const root = document.getElementById('root')
 
